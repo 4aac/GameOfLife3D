@@ -11,4 +11,4 @@ class Grid:
         for row in range(self.rows):
             for col in range(self.columns):
                 color = (0, 0, 0) if self.cells[row][col] else (55, 55, 55)
-                pygame.draw.rect(window, color, (column * self.cell_size, row * self.cell_size, self.cell_size, self.cell_size))
+                pygame.draw.rect(window, color, (col * self.cell_size, row * self.cell_size, self.cell_size, self.cell_size))

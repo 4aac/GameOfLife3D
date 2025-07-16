@@ -1,58 +1,35 @@
-import pygame
-import numpy as np
+import pygame, sys
+from grid import Grid
 
-# pygame setup
 pygame.init()
 
-screen = pygame.display.set_mode((1200, 1200))
+grey = "darkgrey"
+width = 1200
+height = 1200
+cell_size = 15
+fps = 60
+
+cont = True
+
+window = pygame.display.set_mode((width, height))
+pygame.display.set_caption("Basic GoL")
+
 clock = pygame.time.Clock()
-running = True
 
-# Grid blocks size
-block_width = 10
-block_height = 10
-block_margin = 2  # Margin between blocks of the grid
+grid = Grid(width, height, cell_size)
 
 
-def grid_generation(num_blocks: int, height: int, width: int, margin: int) -> list:
-    """
-    Generates the grid for the game visualization
-    """
-    grid = list()
-    for row in range(num_blocks):
-        grid.append([])
-        for column in range(num_blocks):
-            grid[row].append(0)
- 
-    # Printing the grid
-    for row in range(num_blocks):
-        for column in range(num_blocks):
-            color = "darkgrey"
-            pygame.draw.rect(screen,
-                             color,
-                             [(margin + width) * column + margin,
-                              (margin + height) * row + margin,
-                              width,
-                              height]
-                             )
-    return grid
-
-
-# pygame loop
-while running:
+# Game Loop 
+while cont:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            running = False
+            pygame.quit()
+            sys.exit()
 
-    # Drawing the grid
-    screen.fill("black")
 
-    grid_generation(num_blocks=100, block_height, block_width, block_margin)
- 
+    # Drawing 
+    window.fill(grey)
+    grid.draw(window)
 
-    # Displaying the game
-    grid = pygame.display.flip()
-
-    clock.tick(60)  # Limited to 60 fps
-
-pygame.quit()
+    pygame.display.update()
+    clock.tick(fps)
