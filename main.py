@@ -26,6 +26,12 @@ while cont:
             pygame.quit()
             sys.exit()
 
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            position = pygame.mouse.get_pos()
+            row = pos[1]  // cell_size
+            column = pos[0] // cell_size
+            simulation.toggle_cell(row, column)
+
 
     # Drawing 
     window.fill(grey)
